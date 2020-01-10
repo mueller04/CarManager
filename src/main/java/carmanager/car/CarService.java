@@ -8,6 +8,7 @@ import carmanager.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CarService {
@@ -17,12 +18,12 @@ public class CarService {
     @Resource
     private CarRepository repository;
 
-    public void buildCar(Chassis chassis, Engine engine, Tire tire) {
+    public void buildCar(String carName, Chassis chassis, Engine engine, Tire tire) {
 
         int price = chassis.getPrice() + engine.getPrice() + tire.getPrice() + BUILD_FEE;
 
         Car car = Car.builder()
-                .carName("prototypeA")
+                .carName(carName)
                 .price(price)
                 .chassis(chassis)
                 .engine(engine)
@@ -32,8 +33,7 @@ public class CarService {
         repository.save(car);
     }
 
-    public Car fetchCar() {
-        return repository.findByCarName("prototypeA").get(0);
+    public List<Car> fetchCars() {
+        return repository.findAll();
     }
-
 }

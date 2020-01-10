@@ -1,17 +1,16 @@
 package carmanager.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 public class Car {
 
     @Id
@@ -22,15 +21,15 @@ public class Car {
 
     private int price;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CHASSIS_ID")
     private Chassis chassis;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ENGINE_ID")
     private Engine engine;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "TIRE_ID")
     private Tire tire;
 }

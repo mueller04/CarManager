@@ -7,8 +7,8 @@ import carmanager.entity.Chassis;
 import carmanager.entity.Engine;
 import carmanager.entity.Tire;
 import carmanager.tire.TireService;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -26,16 +26,20 @@ public class Application {
                                       ChassisService chassisService) {
         return (args -> {
             chassisService.save("HW", 250000);
-            Chassis chassis = Chassis.builder().chassisName("HX").price(180000).build();
 
-            Engine engine = Engine.builder().engineName("F20").price(140000).build();
             engineService.save("J30", 170000);
 
-            Tire tire = Tire.builder().tireName("Slick").price(50000).build();
             tireService.save("Rain", 75000);
             tireService.save("Intermediate", 65000);
 
-            carService.buildCar(chassis, engine, tire);
+            Chassis chassis = Chassis.builder().chassisName("HX").price(180000).build();
+            Engine engine = Engine.builder().engineName("F20").price(140000).build();
+            Tire tire = Tire.builder().tireName("Slick").price(50000).build();
+            carService.buildCar("PrototypeA", chassis, engine, tire);
+            Chassis chassis2 = Chassis.builder().chassisName("AX").price(250000).build();
+            Engine engine2 = Engine.builder().engineName("W80").price(140000).build();
+            Tire tire2 = Tire.builder().tireName("Rain").price(50000).build();
+            carService.buildCar("PrototypeB", chassis2, engine2, tire2);
         });
     }
 }

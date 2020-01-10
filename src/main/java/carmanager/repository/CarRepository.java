@@ -8,8 +8,4 @@ import java.util.List;
 public interface CarRepository extends CrudRepository<Car, Long> {
 
     List<Car> findAll();
-
-    List<Car> findByCarName(String carName);
-
-
 }

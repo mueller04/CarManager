@@ -33,7 +33,7 @@ public class CarServiceTest {
         int buildFee = 90000;
         int expectedPrice = 18 + buildFee;
 
-        carService.buildCar(chassis, engine, tire);
+        carService.buildCar("prototypeA", chassis, engine, tire);
 
         Car expectedCar = Car.builder()
                 .carName("prototypeA")

@@ -13,8 +13,8 @@ public class TireService {
     @Resource
     private TireRepository repository;
 
-    public void save(String name, int price) {
-        repository.save(Tire.builder().tireName(name).price(price).build());
+    public Tire save(String name, int price) {
+        return repository.save(Tire.builder().tireName(name).price(price).build());
     }
 
     public Tire fetchTireById(Long id) {

@@ -1,6 +1,5 @@
 package carmanager.engine;
 
-import carmanager.entity.Chassis;
 import carmanager.entity.Engine;
 import carmanager.repository.EngineRepository;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,8 @@ public class EngineService {
     @Resource
     private EngineRepository repository;
 
-    public void save(String name, int price) {
-        repository.save(Engine.builder().engineName(name).price(price).build());
+    public Engine save(String name, int price) {
+        return repository.save(Engine.builder().engineName(name).price(price).build());
     }
 
     public Engine fetchEngineById(Long id) {

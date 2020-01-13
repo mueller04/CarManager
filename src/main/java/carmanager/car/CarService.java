@@ -25,9 +25,9 @@ public class CarService {
         Car car = Car.builder()
                 .carName(carName)
                 .price(price)
-                .chassis(chassis)
-                .engine(engine)
-                .tire(tire)
+                .chassisId(chassis.getId())
+                .engineId(engine.getId())
+                .tireId(tire.getId())
                 .build();
 
         repository.save(car);

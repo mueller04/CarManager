@@ -13,16 +13,12 @@ public class ChassisService {
     @Resource
     private ChassisRepository repository;
 
-    public Chassis fetchChassisByName(String name) {
-        return repository.findByChassisName(name).get(0);
-    }
-
     public Chassis fetchChassisById(Long id) {
         return repository.findById(id).get();
     }
 
-    public void save(String name, int price) {
-        repository.save(Chassis.builder().chassisName(name).price(price).build());
+    public Chassis save(String name, int price) {
+        return repository.save(Chassis.builder().chassisName(name).price(price).build());
     }
 
     public List<Chassis> fetchChassis() {

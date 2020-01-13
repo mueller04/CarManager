@@ -21,15 +21,12 @@ public class Car {
 
     private int price;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "CHASSIS_ID")
-    private Chassis chassis;
+    @Column(nullable = true)
+    private Long chassisId;;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ENGINE_ID")
-    private Engine engine;
+    @Column(nullable = true)
+    private Long engineId;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "TIRE_ID")
-    private Tire tire;
+    @Column(nullable = true)
+    private Long tireId;
 }

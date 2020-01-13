@@ -33,6 +33,10 @@ public class CarService {
         repository.save(car);
     }
 
+    public Car fetchCarById(Long id) {
+        return repository.findById(id).get();
+    }
+
     public List<Car> fetchCars() {
         return repository.findAll();
     }

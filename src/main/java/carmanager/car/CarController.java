@@ -2,10 +2,12 @@ package carmanager.car;
 
 import carmanager.chassis.ChassisService;
 import carmanager.engine.EngineService;
+import carmanager.entity.Car;
 import carmanager.entity.Chassis;
 import carmanager.entity.Engine;
 import carmanager.entity.Tire;
 import carmanager.tire.TireService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,15 @@ public class CarController {
 
     @Resource
     EntityManager entityManager;
+
+    @GetMapping("/car")
+    public CarDAO fetchCar(@RequestParam("carId") Long carId) {
+        Car car = carService.fetchCarById(carId);
+        Chassis chassis = chassisService.fetchChassisById(carId);
+        Engine engine = engineService.fetchEngineById(car.getEngineId());
+        Tire tire = tireService.fetchTireById(car.getTireId());
+        return CarDAO.builder().car(car).chassis(chassis).engine(engine).tire(tire).build();
+    }
 
     @PostMapping("/createCar")
     public void createCar(@RequestParam("carName") String carName,

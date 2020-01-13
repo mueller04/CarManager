@@ -27,14 +27,14 @@
         <p>engine - price</p>
         <select name="engineId">
             <c:forEach  var="engine" items="${engines}">
-                <option value="${engine.id}">"${engine.engineName} $${engine.price}"</option>
+                <option value=${engine.id}>"${engine.engineName} $${engine.price}"</option>
             </c:forEach>
         </select>
 
         <p>tire - price</p>
         <select name="tireId">
             <c:forEach  var="tire" items="${tires}">
-                <option value="${tire.id}">"${tire.tireName} $${tire.price}"</option>
+                <option value=${tire.id}>"${tire.tireName} $${tire.price}"</option>
             </c:forEach>
         </select>
 
@@ -48,6 +48,8 @@
     <a href="/createTire">Create Tire</a>
     </br>
     <a href="/createEngine">Create Engine</a>
+    </br>
+    <a href="/viewCar">View Car</a>
 
 </body>
 </html>

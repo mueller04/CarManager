@@ -1,5 +1,7 @@
 package carmanager;
 
+import carmanager.car.CarController;
+import carmanager.car.CarDAO;
 import carmanager.car.CarService;
 import carmanager.chassis.ChassisService;
 import carmanager.engine.EngineService;
@@ -11,12 +13,14 @@ import carmanager.tire.TireService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class IndexController {
+public class WebController {
 
     @Resource
     CarService carService;
@@ -29,6 +33,9 @@ public class IndexController {
 
     @Resource
     TireService tireService;
+
+    @Resource
+    CarController carController;
 
     @RequestMapping("/")
     String index(Model model){
@@ -58,5 +65,21 @@ public class IndexController {
     @RequestMapping("/createTire")
     String createTire() {
         return "createTire";
+    }
+
+    @RequestMapping("/viewCar")
+    String viewCar(Model model) {
+        List<Car> cars = carService.fetchCars();
+        model.addAttribute("cars", cars);
+        return "viewCar";
+    }
+
+    @RequestMapping("fetchCarDetails")
+    String fetchCarDetails(@RequestParam("carId") Long carId, Model model) {
+        CarDAO carDAO = carController.fetchCar(carId);
+        List<Car> cars = carService.fetchCars();
+        model.addAttribute("carDAO", carDAO);
+        model.addAttribute("cars", cars);
+        return "viewCar";
     }
 }

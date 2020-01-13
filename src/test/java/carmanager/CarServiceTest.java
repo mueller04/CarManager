@@ -26,9 +26,9 @@ public class CarServiceTest {
 
     @Test
     public void testBuildCar() {
-        Chassis chassis = Chassis.builder().price(10).build();
-        Engine engine = Engine.builder().price(6).build();
-        Tire tire = Tire.builder().price(2).build();
+        Chassis chassis = Chassis.builder().id(1L).price(10).build();
+        Engine engine = Engine.builder().id(2L).price(6).build();
+        Tire tire = Tire.builder().id(3L).price(2).build();
 
         int buildFee = 90000;
         int expectedPrice = 18 + buildFee;
@@ -37,10 +37,10 @@ public class CarServiceTest {
 
         Car expectedCar = Car.builder()
                 .carName("prototypeA")
-                .chassis(chassis)
-                .engine(engine)
+                .chassisId(chassis.getId())
+                .engineId(engine.getId())
                 .price(expectedPrice)
-                .tire(tire)
+                .tireId(tire.getId())
                 .build();
         verify(carRepository).save(expectedCar);
     }

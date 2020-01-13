@@ -2,6 +2,7 @@ package carmanager;
 
 
 import carmanager.chassis.ChassisService;
+import carmanager.entity.Chassis;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +10,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,10 +29,8 @@ public class ChassisControllerTest {
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
-    @MockBean
-    private ChassisService personService;
-
-    private JacksonTester jsonTester;
+    @Autowired
+    private ChassisService chassisService;
 
     @Before
     public void setUp() {
@@ -42,10 +40,13 @@ public class ChassisControllerTest {
 
     @Test
     public void createChassisDelegatesToService() throws Exception {
+
         mockMvc.perform(
                 post("/chassis?chassisName=foo&price=1"))
                 .andExpect(status().isOk());
 
-        verify(personService).save("foo", 1);
+        Chassis chassis = chassisService.fetchChassis().get(3);
+        Chassis expected = Chassis.builder().id(4L).chassisName("foo").price(1).build();
+        assertEquals(expected , chassis);
     }
 }

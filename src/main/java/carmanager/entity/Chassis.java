@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Builder
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 public class Chassis {
 
     @Id
